@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		221776021BB3DCF00029E3BD /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 221776011BB3DCF00029E3BD /* SearchViewController.m */; };
 		22FD71191BB23DE60058E69E /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FD71181BB23DE60058E69E /* DetailViewController.m */; };
 		22FD711F1BB24F0C0058E69E /* HomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FD711E1BB24F0C0058E69E /* HomeTableViewCell.m */; };
 		22FFFB4F1BB161C4004C844C /* citydict.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22FFFB4E1BB161C4004C844C /* citydict.plist */; };
@@ -53,7 +54,6 @@
 		9AA3C9A81BAE83570049BECE /* iconfont-user.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AA3C9A61BAE83570049BECE /* iconfont-user.png */; };
 		9AA3C9AB1BAE97E00049BECE /* storageMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AA3C9AA1BAE97E00049BECE /* storageMgr.m */; };
 		9AA3C9AF1BAEA5380049BECE /* iconfont-email.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AA3C9AE1BAEA5380049BECE /* iconfont-email.png */; };
-		9AAEE1221BB3897400CC559D /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AAEE1211BB3897400CC559D /* SearchViewController.m */; };
 		9AAEE1271BB39F6700CC559D /* 标记.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AAEE1231BB39F6700CC559D /* 标记.png */; };
 		9AAEE1281BB39F6700CC559D /* 地址.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AAEE1241BB39F6700CC559D /* 地址.png */; };
 		9AAEE1291BB39F6700CC559D /* 积分.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AAEE1251BB39F6700CC559D /* 积分.png */; };
@@ -120,6 +120,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		221776001BB3DCF00029E3BD /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		221776011BB3DCF00029E3BD /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		22FD71171BB23DE60058E69E /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		22FD71181BB23DE60058E69E /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		22FD711D1BB24F0C0058E69E /* HomeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTableViewCell.h; sourceTree = "<group>"; };
@@ -177,8 +179,6 @@
 		9AA3C9A91BAE97E00049BECE /* storageMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = storageMgr.h; sourceTree = "<group>"; };
 		9AA3C9AA1BAE97E00049BECE /* storageMgr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = storageMgr.m; sourceTree = "<group>"; };
 		9AA3C9AE1BAEA5380049BECE /* iconfont-email.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iconfont-email.png"; path = "images/iconfont-email.png"; sourceTree = SOURCE_ROOT; };
-		9AAEE1201BB3897400CC559D /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchViewController.h; path = "../../../../Travel_W副本1/Travel_W/SearchViewController.h"; sourceTree = "<group>"; };
-		9AAEE1211BB3897400CC559D /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchViewController.m; path = "../../../../Travel_W副本1/Travel_W/SearchViewController.m"; sourceTree = "<group>"; };
 		9AAEE1231BB39F6700CC559D /* 标记.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "标记.png"; path = "images/标记.png"; sourceTree = SOURCE_ROOT; };
 		9AAEE1241BB39F6700CC559D /* 地址.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "地址.png"; path = "images/地址.png"; sourceTree = SOURCE_ROOT; };
 		9AAEE1251BB39F6700CC559D /* 积分.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "积分.png"; path = "images/积分.png"; sourceTree = SOURCE_ROOT; };
@@ -335,8 +335,8 @@
 		22FFFB4A1BB15F65004C844C /* 首页 */ = {
 			isa = PBXGroup;
 			children = (
-				9AAEE1201BB3897400CC559D /* SearchViewController.h */,
-				9AAEE1211BB3897400CC559D /* SearchViewController.m */,
+				221776001BB3DCF00029E3BD /* SearchViewController.h */,
+				221776011BB3DCF00029E3BD /* SearchViewController.m */,
 				9AA3C9961BAE7AB40049BECE /* HomeViewController.h */,
 				9AA3C9971BAE7AB40049BECE /* HomeViewController.m */,
 				22FD711D1BB24F0C0058E69E /* HomeTableViewCell.h */,
@@ -788,7 +788,6 @@
 				22FFFB571BB174BB004C844C /* DOPNavbarMenu.m in Sources */,
 				9ACE6C631BAD3E1300E51A1D /* SDImageCache.m in Sources */,
 				9ACE6C671BAD3E1300E51A1D /* SDWebImageDownloaderOperation.m in Sources */,
-				9AAEE1221BB3897400CC559D /* SearchViewController.m in Sources */,
 				9ACE6C701BAD3E1300E51A1D /* UIView+WebCacheOperation.m in Sources */,
 				9AA3C9AB1BAE97E00049BECE /* storageMgr.m in Sources */,
 				9ACE6BBA1BAD3B5600E51A1D /* Travel_W.xcdatamodeld in Sources */,
@@ -808,6 +807,7 @@
 				9ACE6C6F1BAD3E1300E51A1D /* UIImageView+WebCache.m in Sources */,
 				9ACE6C851BAD3E2000E51A1D /* AFHTTPRequestOperationManager.m in Sources */,
 				9ACE6D361BAD5F1D00E51A1D /* MainViewController.m in Sources */,
+				221776021BB3DCF00029E3BD /* SearchViewController.m in Sources */,
 				9ACE6C9D1BAD427B00E51A1D /* ECSlidingAnimationController.m in Sources */,
 				9ACE6C8A1BAD3E2000E51A1D /* AFURLRequestSerialization.m in Sources */,
 				9ACE6C651BAD3E1300E51A1D /* SDWebImageDecoder.m in Sources */,
