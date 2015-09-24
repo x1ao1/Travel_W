@@ -31,4 +31,7 @@
 //清理内存
 #define FRelease(x) {[x removeFromSuperview]; x = nil;}
 
+#define NAVBARHIGHT 60
+#define SEARCHBARWIDTH 100
+
 #endif

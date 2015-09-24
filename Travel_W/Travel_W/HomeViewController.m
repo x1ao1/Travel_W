@@ -9,14 +9,57 @@
 #import "HomeViewController.h"
 #import "DetailViewController.h"
 #import "HomeTableViewCell.h"
-@interface HomeViewController ()
+#import "SearchViewController.h"
+@interface HomeViewController ()<UISearchBarDelegate>
 
 @end
 
 @implementation HomeViewController
 @synthesize slideImages;
+//创建导航栏，导航栏上有搜索栏按钮，点击进入下一个页面
+-(void)createSearchBar
+{
+    UINavigationBar *bar=self.navigationController.navigationBar;
+    bar.barTintColor=[UIColor colorWithRed:0 green:0.7 blue:0.9 alpha:1];//设置导航栏的颜色
+    bar.barStyle=UIBarStyleBlackTranslucent;
+    
+    UINavigationItem *item=self.navigationItem;
+    UISearchBar *search=[[UISearchBar alloc]initWithFrame:CGRectMake(0, 0,SEARCHBARWIDTH,NAVBARHIGHT)];
+    search.delegate=self;
+    // search.barTintColor=[UIColor yellowColor];
+    item.titleView=search;
+    search.placeholder=@"／旅行地／景点";
+    self.navigationController.navigationBar.translucent=NO;
+    self.tabBarController.tabBar.hidden=NO;
+    item.backBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+}
+//搜索栏上的按钮点击进入下一个页面
+-(void)tap:(UITapGestureRecognizer *)gest
+{
+    SearchViewController *searchView=[[SearchViewController alloc]init];
+    NSLog(@"start");
+    [self.navigationController pushViewController:searchView animated:YES];
+}
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
+{
+    SearchViewController *searchView=[[SearchViewController alloc]init];
+    NSLog(@"start");
+    searchView.hidesBottomBarWhenPushed=YES;
+    [self.navigationController pushViewController:searchView animated:YES];
+    return NO;
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    [self.tabBarController.tabBar setHidden:NO];
+    self.navigationController.navigationBar.translucent=NO;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //导航栏
+    [self createSearchBar];
+    
     //界面操作
     [self uiConfiguration];
 

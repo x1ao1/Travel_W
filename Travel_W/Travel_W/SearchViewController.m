@@ -2,107 +2,127 @@
 //  SearchViewController.m
 //  Travel_W
 //
-//  Created by 王亚丽 on 15/9/22.
+//  Created by 王萌 on 15/9/23.
 //  Copyright (c) 2015年 WM. All rights reserved.
 //
 
 #import "SearchViewController.h"
 
-@interface SearchViewController ()
-
+@interface SearchViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
+@property(nonatomic,strong) UISearchBar* searchBar;
+@property(nonatomic,strong)NSMutableArray* searchResult;
 @end
 
 @implementation SearchViewController
 
 - (void)viewDidLoad {
+    self.view.backgroundColor=[UIColor whiteColor];
     [super viewDidLoad];
-    [self dataPreparation];//数据准备
-    [self uiSetUp];        //界面操作
-}
-
-- (void)dataPreparation
-{
-    //初始化
-    self.keys = [NSMutableArray array];
-    //文件路径
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"citydict" ofType:@"plist"];
-    //文件的内容
-    self.cities = [NSMutableDictionary dictionaryWithContentsOfFile:path];
-    //通过keys获取所有的allkeys值，然后进行compare排序比较
-    [self.keys addObjectsFromArray:[[self.cities allKeys] sortedArrayUsingSelector:@selector(compare:)]];
-}
-- (void)uiSetUp
-{
-    //把tableViewCell下面的下划线部分去掉
-    _tableView.tableFooterView = [[UIView alloc] init];
-}
-
-#pragma mark - tableView
-
-//分组标题的行高(不写系统也默认20)
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 20.0;
-}
-
-
-//分组
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+    [self creatSearchBar];
+    [self.searchBar becomeFirstResponder];
+    [self createHistroyData];
+    [self createTableView];
     
-    return [_keys count];
 }
-
-//显示分组标题 titleForHeaderInSection显示文字用这个
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+//创建搜索栏
+-(void)creatSearchBar
 {
-    return [_keys objectAtIndex:section];
-}
-
-//显示右侧的内容
-- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
-{
-    return _keys;
-}
-//表格行数
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    //keys把所有的ABCD..提取出来，cities是把ABCD..里面的值显示出来
-    NSString *key = [_keys objectAtIndex:section];
-    NSArray *citySection = [_cities objectForKey:key];
-    return [citySection count];
-}
-
-//单元格内容设置
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSString *key = [_keys objectAtIndex:indexPath.section];
-    NSArray *cities = [_cities objectForKey:key];
+    UISearchBar *searchBar=[[UISearchBar alloc]initWithFrame:CGRectMake(0, 20, self.navigationController.navigationBar.bounds.size.width, self.navigationController.navigationBar.bounds.size.height)];
+    UINavigationItem *item=self.navigationItem;
+    item.hidesBackButton=YES;
+    item.titleView=searchBar;
+    [searchBar setShowsCancelButton:YES];
+    self.searchBar=searchBar;
+    self.searchBar.delegate=self;
+    [self.searchBar becomeFirstResponder];
     
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] ;
-        [cell.textLabel setTextColor:[UIColor blackColor]];
-        cell.textLabel.font = [UIFont systemFontOfSize:15];
+}
+-(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    [searchBar resignFirstResponder];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+//创建tableview
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.searchResult.count+1;
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *cellID=@"cellID";
+    UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellID];
+    if(cell==nil)
+    {
+        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
     }
-    //cell.textLabel.text = [[[_cities objectForKey:key] objectAtIndex:indexPath.row] objectForKey:@"name"];
-    cell.textLabel.text = [[cities objectAtIndex:indexPath.row] objectForKey:@"name"];
-    
+    if(indexPath.row==0)
+        cell.textLabel.text=@"历史搜索";
+    else
+        
+        cell.textLabel.text=self.searchResult[indexPath.row-1];
     return cell;
 }
-
-//行选择
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//创建tableview的数据
+-(void)createTableView
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    CGFloat heigh=self.view.bounds.size.height-SCREEN_HEIGHT;
+    CGRect rect=CGRectMake(0, 0, self.view.bounds.size.width,heigh-64);
+    UITableView *table=[[UITableView alloc]initWithFrame:rect style:UITableViewStylePlain];
+    table.dataSource=self;
+    table.delegate=self;
+    [self.view addSubview:table];
 }
-
+//创建历史数据
+-(void)createHistroyData
+{
+    NSString *home=NSHomeDirectory();
+    NSLog(@"%@",home);
+    NSUserDefaults *df=[NSUserDefaults standardUserDefaults];
+    NSMutableArray *arrayData=[df objectForKey:@"历史搜索"];
+    self.searchResult=[NSMutableArray arrayWithArray:arrayData];
+    for(NSString *str in self.searchResult)
+        NSLog(@"%@",str);
+    NSLog(@"111111");
+}
+//当点击search时搜索的记录会被写进plist文件中
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    NSLog(@"%ld",self.searchResult.count);
+    int i;
+    for( i=0;i<self.searchResult.count;i++)
+    {
+        NSLog(@"%@",self.searchResult[i]);
+        if([self.searchBar.text isEqualToString: self.searchResult[i]])
+        {
+            break;
+        }
+    }
+    if(i==self.searchResult.count)
+    {
+        [self.searchResult insertObject:self.searchBar.text atIndex:0];
+    }
+    NSMutableArray *tempArray=self.searchResult;
+    NSUserDefaults *df=[NSUserDefaults standardUserDefaults];
+    [df setObject:tempArray forKey:@"历史搜索" ];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
 
 @end

@@ -10,9 +10,8 @@
 #import "MainViewController.h"
 @interface LoginViewController ()
 - (IBAction)returnAction:(UIBarButtonItem *)sender;
-
 - (IBAction)LoginAction:(UIButton *)sender forEvent:(UIEvent *)event;
-- (IBAction)ForgotPassword:(UIButton *)sender forEvent:(UIEvent *)event;
+//- (IBAction)ForgotPassword:(UIButton *)sender forEvent:(UIEvent *)event;
 @end
 
 @implementation LoginViewController
@@ -120,11 +119,6 @@
             //记住用户名和密码
             [Utilities setUserDefaults:@"userName" content:username];
             [Utilities setUserDefaults:@"passWord" content:password];
-            //            _usernameTF.text = @"";
-            //_passwordTF.text = @"";
-//            [[NSUserDefaults standardUserDefaults] setObject:str forKey:@"isLogin"];
-//            [[NSUserDefaults standardUserDefaults] synchronize];
-//            NSLog(@"我要消失了");
             [self popUpHomePage];
         } else if (error.code == 101) {
             [Utilities popUpAlertViewWithMsg:@"用户名或密码错误" andTitle:nil];
@@ -135,16 +129,21 @@
         }
     }];
     
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:username forKey:@"account"];
+    [userDefaults setObject:password forKey:@"password"];
+    [userDefaults synchronize];
+    
+    
 }
 - (IBAction)returnAction:(UIBarButtonItem *)sender {
-    [PFUser logOut];
     //跳转到上一级页面
     [self dismissViewControllerAnimated:YES completion:nil];
 
 }
 
 
-- (IBAction)ForgotPassword:(UIButton *)sender forEvent:(UIEvent *)event {
-    [PFUser requestPasswordResetForEmailInBackground:@"1217219093@qq.com"];
-}
+//- (IBAction)ForgotPassword:(UIButton *)sender forEvent:(UIEvent *)event {
+//    [PFUser requestPasswordResetForEmailInBackground:@"1217219093@qq.com"];
+//}
 @end
