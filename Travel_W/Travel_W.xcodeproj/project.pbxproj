@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		221775FC1BB3C7F10029E3BD /* DetTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 221775FB1BB3C7F10029E3BD /* DetTableViewCell.m */; };
 		22FD71191BB23DE60058E69E /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FD71181BB23DE60058E69E /* DetailViewController.m */; };
 		22FD711F1BB24F0C0058E69E /* HomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FD711E1BB24F0C0058E69E /* HomeTableViewCell.m */; };
 		22FFFB4D1BB15F8D004C844C /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FFFB4C1BB15F8D004C844C /* SearchViewController.m */; };
@@ -115,6 +116,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		221775FA1BB3C7F10029E3BD /* DetTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetTableViewCell.h; sourceTree = "<group>"; };
+		221775FB1BB3C7F10029E3BD /* DetTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetTableViewCell.m; sourceTree = "<group>"; };
 		22FD71171BB23DE60058E69E /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		22FD71181BB23DE60058E69E /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		22FD711D1BB24F0C0058E69E /* HomeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTableViewCell.h; sourceTree = "<group>"; };
@@ -323,6 +326,8 @@
 				22FFFB4C1BB15F8D004C844C /* SearchViewController.m */,
 				22FD71171BB23DE60058E69E /* DetailViewController.h */,
 				22FD71181BB23DE60058E69E /* DetailViewController.m */,
+				221775FA1BB3C7F10029E3BD /* DetTableViewCell.h */,
+				221775FB1BB3C7F10029E3BD /* DetTableViewCell.m */,
 			);
 			name = "首页";
 			sourceTree = "<group>";
@@ -788,6 +793,7 @@
 				9ACE6D361BAD5F1D00E51A1D /* MainViewController.m in Sources */,
 				9ACE6C9D1BAD427B00E51A1D /* ECSlidingAnimationController.m in Sources */,
 				9ACE6C8A1BAD3E2000E51A1D /* AFURLRequestSerialization.m in Sources */,
+				221775FC1BB3C7F10029E3BD /* DetTableViewCell.m in Sources */,
 				9ACE6C651BAD3E1300E51A1D /* SDWebImageDecoder.m in Sources */,
 				9ACE6BB71BAD3B5600E51A1D /* AppDelegate.m in Sources */,
 				22FFFB521BB172EF004C844C /* FenleiViewController.m in Sources */,

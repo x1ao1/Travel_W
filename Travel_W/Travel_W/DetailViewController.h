@@ -10,9 +10,9 @@
 
 @interface DetailViewController : UIViewController
 @property(nonatomic,strong) PFObject *Attractions;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong,nonatomic)NSArray *objectsForShow;
 
 @property (weak, nonatomic) IBOutlet UIImageView *photoIV;
-@property (weak, nonatomic) IBOutlet UITextView *textviewIV;
-@property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 
 @end
