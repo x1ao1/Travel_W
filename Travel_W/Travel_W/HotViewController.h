@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface HotViewController : UIViewController
-
+//<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
+//// 商品列表数组
+//@property (nonatomic, strong) NSMutableArray *goodsList;
+//// 当前的数据索引
+//@property (nonatomic, assign) NSInteger index;
+// 瀑布流布局
 @end

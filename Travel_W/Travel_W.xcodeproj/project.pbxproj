@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		221776021BB3DCF00029E3BD /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 221776011BB3DCF00029E3BD /* SearchViewController.m */; };
+		221776131BB3EE690029E3BD /* 1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 221776041BB3EE690029E3BD /* 1.plist */; };
+		221776141BB3EE690029E3BD /* 2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 221776051BB3EE690029E3BD /* 2.plist */; };
+		221776151BB3EE690029E3BD /* 3.plist in Resources */ = {isa = PBXBuildFile; fileRef = 221776061BB3EE690029E3BD /* 3.plist */; };
+		221776161BB3EE690029E3BD /* LNGood.m in Sources */ = {isa = PBXBuildFile; fileRef = 221776081BB3EE690029E3BD /* LNGood.m */; };
+		221776171BB3EE690029E3BD /* LNWaterfallFlowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2217760A1BB3EE690029E3BD /* LNWaterfallFlowCell.m */; };
+		221776181BB3EE690029E3BD /* LNWaterfallFlowFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2217760C1BB3EE690029E3BD /* LNWaterfallFlowFooterView.m */; };
+		221776191BB3EE690029E3BD /* LNWaterfallFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2217760E1BB3EE690029E3BD /* LNWaterfallFlowLayout.m */; };
 		22FD71191BB23DE60058E69E /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FD71181BB23DE60058E69E /* DetailViewController.m */; };
 		22FD711F1BB24F0C0058E69E /* HomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FD711E1BB24F0C0058E69E /* HomeTableViewCell.m */; };
 		22FFFB4F1BB161C4004C844C /* citydict.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22FFFB4E1BB161C4004C844C /* citydict.plist */; };
@@ -122,6 +129,17 @@
 /* Begin PBXFileReference section */
 		221776001BB3DCF00029E3BD /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		221776011BB3DCF00029E3BD /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		221776041BB3EE690029E3BD /* 1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 1.plist; path = hot/1.plist; sourceTree = SOURCE_ROOT; };
+		221776051BB3EE690029E3BD /* 2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 2.plist; path = hot/2.plist; sourceTree = SOURCE_ROOT; };
+		221776061BB3EE690029E3BD /* 3.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = 3.plist; path = hot/3.plist; sourceTree = SOURCE_ROOT; };
+		221776071BB3EE690029E3BD /* LNGood.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LNGood.h; path = hot/LNGood.h; sourceTree = SOURCE_ROOT; };
+		221776081BB3EE690029E3BD /* LNGood.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LNGood.m; path = hot/LNGood.m; sourceTree = SOURCE_ROOT; };
+		221776091BB3EE690029E3BD /* LNWaterfallFlowCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LNWaterfallFlowCell.h; path = hot/LNWaterfallFlowCell.h; sourceTree = SOURCE_ROOT; };
+		2217760A1BB3EE690029E3BD /* LNWaterfallFlowCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LNWaterfallFlowCell.m; path = hot/LNWaterfallFlowCell.m; sourceTree = SOURCE_ROOT; };
+		2217760B1BB3EE690029E3BD /* LNWaterfallFlowFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LNWaterfallFlowFooterView.h; path = hot/LNWaterfallFlowFooterView.h; sourceTree = SOURCE_ROOT; };
+		2217760C1BB3EE690029E3BD /* LNWaterfallFlowFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LNWaterfallFlowFooterView.m; path = hot/LNWaterfallFlowFooterView.m; sourceTree = SOURCE_ROOT; };
+		2217760D1BB3EE690029E3BD /* LNWaterfallFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LNWaterfallFlowLayout.h; path = hot/LNWaterfallFlowLayout.h; sourceTree = SOURCE_ROOT; };
+		2217760E1BB3EE690029E3BD /* LNWaterfallFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LNWaterfallFlowLayout.m; path = hot/LNWaterfallFlowLayout.m; sourceTree = SOURCE_ROOT; };
 		22FD71171BB23DE60058E69E /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		22FD71181BB23DE60058E69E /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		22FD711D1BB24F0C0058E69E /* HomeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTableViewCell.h; sourceTree = "<group>"; };
@@ -304,6 +322,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		221776031BB3EC4C0029E3BD /* hot */ = {
+			isa = PBXGroup;
+			children = (
+				221776071BB3EE690029E3BD /* LNGood.h */,
+				221776081BB3EE690029E3BD /* LNGood.m */,
+				221776091BB3EE690029E3BD /* LNWaterfallFlowCell.h */,
+				2217760A1BB3EE690029E3BD /* LNWaterfallFlowCell.m */,
+				2217760B1BB3EE690029E3BD /* LNWaterfallFlowFooterView.h */,
+				2217760C1BB3EE690029E3BD /* LNWaterfallFlowFooterView.m */,
+				2217760D1BB3EE690029E3BD /* LNWaterfallFlowLayout.h */,
+				2217760E1BB3EE690029E3BD /* LNWaterfallFlowLayout.m */,
+			);
+			name = hot;
+			sourceTree = "<group>";
+		};
 		22C2E8F91BB2C50800EF47D3 /* 我的 */ = {
 			isa = PBXGroup;
 			children = (
@@ -328,6 +361,7 @@
 				9AA3C99A1BAE7ACF0049BECE /* HotViewController.m */,
 				22FFFB501BB172EF004C844C /* FenleiViewController.h */,
 				22FFFB511BB172EF004C844C /* FenleiViewController.m */,
+				221776031BB3EC4C0029E3BD /* hot */,
 			);
 			name = "热门";
 			sourceTree = "<group>";
@@ -407,6 +441,9 @@
 			children = (
 				9ACE6BB51BAD3B5600E51A1D /* AppDelegate.h */,
 				9ACE6BB61BAD3B5600E51A1D /* AppDelegate.m */,
+				221776041BB3EE690029E3BD /* 1.plist */,
+				221776051BB3EE690029E3BD /* 2.plist */,
+				221776061BB3EE690029E3BD /* 3.plist */,
 				9ACE6BB21BAD3B5600E51A1D /* Info.plist */,
 				22FFFB4E1BB161C4004C844C /* citydict.plist */,
 				9ACE6BB31BAD3B5600E51A1D /* main.m */,
@@ -435,13 +472,13 @@
 		9ACE6BE41BAD3C4400E51A1D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				22FFFB4A1BB15F65004C844C /* 首页 */,
-				22C2E8F91BB2C50800EF47D3 /* 我的 */,
-				22FD71161BB2298B0058E69E /* 热门 */,
 				9ACE6BBB1BAD3B5600E51A1D /* ViewController.h */,
 				9ACE6BBC1BAD3B5600E51A1D /* ViewController.m */,
 				9ACE6D341BAD5F1D00E51A1D /* MainViewController.h */,
 				9ACE6D351BAD5F1D00E51A1D /* MainViewController.m */,
+				22FFFB4A1BB15F65004C844C /* 首页 */,
+				22C2E8F91BB2C50800EF47D3 /* 我的 */,
+				22FD71161BB2298B0058E69E /* 热门 */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -717,6 +754,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				221776131BB3EE690029E3BD /* 1.plist in Resources */,
 				9A702F2A1BB0D89F003AB0FE /* hd_004.jpg in Resources */,
 				9AAEE12A1BB39F6700CC559D /* 去过.png in Resources */,
 				9AA3C9781BAE64640049BECE /* s_0.png in Resources */,
@@ -728,6 +766,7 @@
 				9A702F281BB0D89F003AB0FE /* hd_002.jpg in Resources */,
 				9AA3C9921BAE64700049BECE /* b_6.png in Resources */,
 				9AA3C98F1BAE64700049BECE /* b_3.png in Resources */,
+				221776151BB3EE690029E3BD /* 3.plist in Resources */,
 				9AA3C9801BAE64640049BECE /* s_8.png in Resources */,
 				9A702F271BB0D89F003AB0FE /* hd_001.jpg in Resources */,
 				9AA3C9901BAE64700049BECE /* b_4.png in Resources */,
@@ -739,6 +778,7 @@
 				9AA3C9911BAE64700049BECE /* b_5.png in Resources */,
 				9AA3C9811BAE64640049BECE /* s_9.png in Resources */,
 				9AA3C9A71BAE83570049BECE /* iconfont-password.png in Resources */,
+				221776141BB3EE690029E3BD /* 2.plist in Resources */,
 				9AAEE1291BB39F6700CC559D /* 积分.png in Resources */,
 				9A897B861BAFE2B80070EAC8 /* bg_Login.png in Resources */,
 				9AA3C9791BAE64640049BECE /* s_1.png in Resources */,
@@ -782,11 +822,13 @@
 				9ACE6BEF1BAD3D1A00E51A1D /* Utilities.m in Sources */,
 				9ACE6C681BAD3E1300E51A1D /* SDWebImageManager.m in Sources */,
 				9ACE6C841BAD3E2000E51A1D /* AFHTTPRequestOperation.m in Sources */,
+				221776171BB3EE690029E3BD /* LNWaterfallFlowCell.m in Sources */,
 				9ACE6C9E1BAD427B00E51A1D /* ECSlidingInteractiveTransition.m in Sources */,
 				22FD71191BB23DE60058E69E /* DetailViewController.m in Sources */,
 				9ACE6C8B1BAD3E2000E51A1D /* AFURLResponseSerialization.m in Sources */,
 				22FFFB571BB174BB004C844C /* DOPNavbarMenu.m in Sources */,
 				9ACE6C631BAD3E1300E51A1D /* SDImageCache.m in Sources */,
+				221776191BB3EE690029E3BD /* LNWaterfallFlowLayout.m in Sources */,
 				9ACE6C671BAD3E1300E51A1D /* SDWebImageDownloaderOperation.m in Sources */,
 				9ACE6C701BAD3E1300E51A1D /* UIView+WebCacheOperation.m in Sources */,
 				9AA3C9AB1BAE97E00049BECE /* storageMgr.m in Sources */,
@@ -797,9 +839,11 @@
 				9ACE6C9C1BAD427B00E51A1D /* ECPercentDrivenInteractiveTransition.m in Sources */,
 				9ACE6C691BAD3E1300E51A1D /* SDWebImagePrefetcher.m in Sources */,
 				9ACE6C881BAD3E2000E51A1D /* AFSecurityPolicy.m in Sources */,
+				221776161BB3EE690029E3BD /* LNGood.m in Sources */,
 				9ACE6CA11BAD427B00E51A1D /* UIViewController+ECSlidingViewController.m in Sources */,
 				9ACE6C8C1BAD3E2000E51A1D /* AFURLSessionManager.m in Sources */,
 				9ACE6C661BAD3E1300E51A1D /* SDWebImageDownloader.m in Sources */,
+				221776181BB3EE690029E3BD /* LNWaterfallFlowFooterView.m in Sources */,
 				9ACE6BEE1BAD3D1A00E51A1D /* appAPIClient.m in Sources */,
 				9ACE6C861BAD3E2000E51A1D /* AFHTTPSessionManager.m in Sources */,
 				9ACE6C6D1BAD3E1300E51A1D /* UIImage+WebP.m in Sources */,

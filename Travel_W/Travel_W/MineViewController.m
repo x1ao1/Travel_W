@@ -79,8 +79,8 @@
 
 
 - (IBAction)LoginAction:(UIButton *)sender forEvent:(UIEvent *)event {
-     LoginViewController *login = [self.storyboard instantiateViewControllerWithIdentifier:@"Login"];
     
+    LoginViewController *login = [self.storyboard instantiateViewControllerWithIdentifier:@"Login"];
     //初始化导航控制器
     UINavigationController *nc = [[UINavigationController alloc]initWithRootViewController:login];
     //动画效果
