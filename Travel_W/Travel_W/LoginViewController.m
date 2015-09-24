@@ -9,8 +9,9 @@
 #import "LoginViewController.h"
 #import "MainViewController.h"
 @interface LoginViewController ()
+- (IBAction)returnAction:(UIBarButtonItem *)sender;
+
 - (IBAction)LoginAction:(UIButton *)sender forEvent:(UIEvent *)event;
-- (IBAction)RegisteredAction:(UIBarButtonItem *)sender;
 - (IBAction)ForgotPassword:(UIButton *)sender forEvent:(UIEvent *)event;
 @end
 
@@ -19,6 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self UISetting];
+    
     
     //记住用户名和密码
     if (![[Utilities getUserDefaults:@"userName"] isKindOfClass:[NSNull class]]) {
@@ -97,8 +99,11 @@
     [super touchesBegan:touches withEvent:event];
     [self.view endEditing:YES];
 }
-//登录按钮
+
+
 - (IBAction)LoginAction:(UIButton *)sender forEvent:(UIEvent *)event {
+    
+    
     NSString *username = _UserNameTextField.text;
     NSString *password = _PasswordTextField.text;
     
@@ -112,11 +117,14 @@
     [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser *user, NSError *error) {
         [aiv stopAnimating];
         if (user) {
-            //用户登录成功username保存在textFied上
+            //记住用户名和密码
             [Utilities setUserDefaults:@"userName" content:username];
             [Utilities setUserDefaults:@"passWord" content:password];
             //            _usernameTF.text = @"";
             //_passwordTF.text = @"";
+//            [[NSUserDefaults standardUserDefaults] setObject:str forKey:@"isLogin"];
+//            [[NSUserDefaults standardUserDefaults] synchronize];
+//            NSLog(@"我要消失了");
             [self popUpHomePage];
         } else if (error.code == 101) {
             [Utilities popUpAlertViewWithMsg:@"用户名或密码错误" andTitle:nil];
@@ -126,12 +134,15 @@
             [Utilities popUpAlertViewWithMsg:nil andTitle:nil];
         }
     }];
-}
-//注册按钮
-- (IBAction)RegisteredAction:(UIBarButtonItem *)sender {
-    
     
 }
+- (IBAction)returnAction:(UIBarButtonItem *)sender {
+    [PFUser logOut];
+    //跳转到上一级页面
+    [self dismissViewControllerAnimated:YES completion:nil];
+
+}
+
 
 - (IBAction)ForgotPassword:(UIButton *)sender forEvent:(UIEvent *)event {
     [PFUser requestPasswordResetForEmailInBackground:@"1217219093@qq.com"];

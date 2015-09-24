@@ -11,6 +11,7 @@
 #import "LoginViewController.h"
 @interface RegisteredViewController ()
 - (IBAction)signupAction:(UIButton *)sender forEvent:(UIEvent *)event;
+- (IBAction)returnAction:(UIBarButtonItem *)sender;
 
 @end
 
@@ -34,6 +35,11 @@
     _emailTF.clearButtonMode = UITextFieldViewModeAlways;
     [self.view addSubview:_emailTF];
     
+    _addressTF.layer.cornerRadius = 5.0;
+    _addressTF.borderStyle = UITextBorderStyleBezel;
+    _addressTF.clearButtonMode = UITextFieldViewModeAlways;
+    [self.view addSubview:_addressTF];
+    
     _confirmPwdTF.layer.cornerRadius = 5.0;
     _confirmPwdTF.borderStyle = UITextBorderStyleBezel;
     _confirmPwdTF.clearButtonMode = UITextFieldViewModeAlways;
@@ -52,9 +58,16 @@
     _emailTF.layer.borderColor = boColor.CGColor;
     _emailTF.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
     _emailTF.leftViewMode = UITextFieldViewModeAlways;
-    UIImageView* imgEail = [[UIImageView alloc] initWithFrame:CGRectMake(11, 11, 22, 22)];
-    imgEail.image = [UIImage imageNamed:@"iconfont-email"];
-    [_emailTF.leftView addSubview:imgEail];
+    UIImageView* imgEmail = [[UIImageView alloc] initWithFrame:CGRectMake(11, 11, 22, 22)];
+    imgEmail.image = [UIImage imageNamed:@"iconfont-email"];
+    [_emailTF.leftView addSubview:imgEmail];
+    
+    _addressTF.layer.borderColor = boColor.CGColor;
+    _addressTF.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+    _addressTF.leftViewMode = UITextFieldViewModeAlways;
+    UIImageView* imgAddress = [[UIImageView alloc] initWithFrame:CGRectMake(11, 11, 22, 22)];
+    imgAddress.image = [UIImage imageNamed:@"iconfont-address"];
+    [_addressTF.leftView addSubview:imgAddress];
     
     _passwordTF.layer.borderColor = boColor.CGColor;
     _passwordTF.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
@@ -92,6 +105,7 @@
     NSString *username=_usernameTF.text;
     NSString *email=_emailTF.text;
     NSString *password=_passwordTF.text;
+    NSString *address=_addressTF.text;
     NSString *confirmPwd=_confirmPwdTF.text;
     
     if ([username isEqualToString:@""] || [email isEqualToString:@""] || [password isEqualToString:@""] || [confirmPwd isEqualToString:@""]) {
@@ -105,9 +119,12 @@
     
     //创建用户
     PFUser *user=[PFUser user];
+    PFObject *object=[PFUser user];
+    object[@"address"]=address;
     user.username=username;
     user.password=password;
     user.email=email;
+   
     
     //创建一个保护膜
     UIActivityIndicatorView *aiv = [Utilities getCoverOnView:self.view];
@@ -141,6 +158,12 @@
          }
          
      }];
+
+}
+
+- (IBAction)returnAction:(UIBarButtonItem *)sender {
+    //跳转到上一级页面
+    [self dismissViewControllerAnimated:YES completion:nil];
 
 }
 @end

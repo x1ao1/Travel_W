@@ -17,13 +17,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.backgroundColor = [UIColor whiteColor];
-    
-    ViewController *view =[[ViewController alloc]init];
-    self.window.rootViewController =view;
-    
-    [self.window makeKeyAndVisible];
+//    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+//    self.window.backgroundColor = [UIColor whiteColor];
+//    
+//    ViewController *view =[[ViewController alloc]init];
+//    self.window.rootViewController =view;
+//    
+//    [self.window makeKeyAndVisible];
     
     [Parse setApplicationId:@"sqpmnttcRwGQHtMEZh2hEg6vH5BpXlPZyeCUa3EB" clientKey:@"5BVcf35WdLkHSev2acEYdkNzyP7StRA9Wyzp8vEZ"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];

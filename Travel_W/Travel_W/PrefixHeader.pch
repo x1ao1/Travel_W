@@ -15,6 +15,11 @@
 #import <Parse/Parse.h>
 #import "Utilities.h"
 #import "storageMgr.h"
+#import "AFHTTPRequestOperationManager.h"
 #import "ECSlidingViewController.h"
 #import "Constants.h"
+#define LOGINURL @"http://ly.coderss.cn/index.php?m=Cwl&a=login"//登录用户
+#define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
+#define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
+
 #endif
