@@ -41,7 +41,7 @@
     [self.goodsList addObjectsFromArray:goods];
     self.index++;
     // 设置布局的属性
-    self.waterfallFlowLayout.columnCount = 3;
+    self.waterfallFlowLayout.columnCount = 2;
     self.waterfallFlowLayout.goodsList = self.goodsList;
     // 刷新数据
     //[self.collectionView reloadData];

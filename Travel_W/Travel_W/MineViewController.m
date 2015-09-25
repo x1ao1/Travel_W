@@ -10,7 +10,10 @@
 #import "LoginViewController.h"
 #import "SetViewController.h"
 @interface MineViewController ()
-- (IBAction)LoginAction:(UIButton *)sender forEvent:(UIEvent *)event;
+
+- (IBAction)LoginAction:(UIBarButtonItem *)sender;
+
+- (IBAction)BackAction:(UIButton *)sender forEvent:(UIEvent *)event;
 
 @end
 
@@ -77,18 +80,56 @@
     // Dispose of any resources that can be recreated.
 }
 
+//视图出现之前做的事情
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self read];
+}
 
-- (IBAction)LoginAction:(UIButton *)sender forEvent:(UIEvent *)event {
+-(void)read
+{
+    PFUser *currentUser = [PFUser currentUser];
+    if (currentUser != nil) {
+        
+        PFFile *photo = currentUser[@"Photo"];
+        [photo getDataInBackgroundWithBlock:^(NSData *photoData, NSError *error) {
+            if (!error) {
+                UIImage *image = [UIImage imageWithData:photoData];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    _Photo.image = image;
+                    
+                });
+            }
+        }];
+        _buttonItem.enabled=  NO;
+        _buttonItem.title=@"已登录";
+        _backButton.hidden = NO;
+    } else {
+        _buttonItem.enabled=YES;
+        _buttonItem.title=@"登录";
+        _backButton.hidden = YES;
+        _nameLabel.text = @"未登录";
+        _Photo.image = nil;
+        
+    }
+}
+
+- (IBAction)LoginAction:(UIBarButtonItem *)sender {
+    LoginViewController *denglu = [self.storyboard instantiateViewControllerWithIdentifier:@"Login"];
+   
+        UINavigationController *nc = [[UINavigationController alloc]initWithRootViewController:denglu];
     
-    LoginViewController *login = [self.storyboard instantiateViewControllerWithIdentifier:@"Login"];
-    //初始化导航控制器
-    UINavigationController *nc = [[UINavigationController alloc]initWithRootViewController:login];
-    //动画效果
-    //nc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    //导航条隐藏掉
-    nc.navigationBarHidden = YES;
-    //类似那个箭头 跳转到第二个界面
-    [self presentViewController:nc animated:YES completion:nil];
+        nc.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        nc.navigationBarHidden = NO;
+        [self presentViewController:nc animated:YES completion:nil];
+    
+}
+
+- (IBAction)BackAction:(UIButton *)sender forEvent:(UIEvent *)event {
+    
+    [PFUser logOut];
+    [self read];
 }
 
 @end

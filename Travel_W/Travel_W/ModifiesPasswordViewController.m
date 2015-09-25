@@ -14,8 +14,6 @@
 - (IBAction)returnAction:(UIBarButtonItem *)sender;
 
 
-- (IBAction)Return:(UIBarButtonItem *)sender;
-
 @end
 
 @implementation ModifiesPasswordViewController

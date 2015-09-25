@@ -9,11 +9,15 @@
 #import <UIKit/UIKit.h>
 
 @interface MineViewController : UIViewController<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
-//@property (weak, nonatomic) IBOutlet UIButton *imgButton;
-//@property(strong,nonatomic)UIImagePickerController *imagePickerController;
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,strong) NSMutableArray *imageArray,*array;
+
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *buttonItem;
+@property (weak, nonatomic) IBOutlet UIButton *backButton;
+
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *Photo;
 
 
 @end

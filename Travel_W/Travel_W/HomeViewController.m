@@ -212,15 +212,7 @@
     cell.nameLabel.text = object[@"Name"];
     cell.priceLabel.text =object[@"Pirce"];
     cell.citynameLabel.text =object[@"City"];
-    
-    
-    
-    //9d54bab371f168e6e2744aee48bc888e
-    
-    
-    //cell.detailTextLabel.text = [NSString stringWithFormat:@"售价：%@", object[@"price"]];
-    
-//获取数据库的图片（下载）
+    //获取数据库的图片（下载）
     //创建item
     PFFile *item = object[@"Photo"];
     [item getDataInBackgroundWithBlock:^(NSData *photoData, NSError *error) {
@@ -234,7 +226,6 @@
     
     return cell;
 }
-
 //通知 到parse读取数据
 - (void)requestData {
     //查询Attractions表中当前用户所有字段
