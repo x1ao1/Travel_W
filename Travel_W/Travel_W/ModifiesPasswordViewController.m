@@ -11,16 +11,30 @@
 @interface ModifiesPasswordViewController ()
 - (IBAction)Confirm:(UIButton *)sender forEvent:(UIEvent *)event;
 
-- (IBAction)returnAction:(UIBarButtonItem *)sender;
-
-
 @end
 
 @implementation ModifiesPasswordViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"img2.jpg"]];
+    
+    //设置textField的属性
+    _t1.layer.cornerRadius = 5.0;
+    _t1.borderStyle = UITextBorderStyleBezel;
+    _t1.clearButtonMode = UITextFieldViewModeAlways;
+    [self.view addSubview:_t1];
+    
+    _t2.layer.cornerRadius = 5.0;
+    _t2.borderStyle = UITextBorderStyleBezel;
+    _t2.clearButtonMode = UITextFieldViewModeAlways;
+    [self.view addSubview:_t2];
+    
+    _t3.layer.cornerRadius = 5.0;
+    _t3.borderStyle = UITextBorderStyleBezel;
+    _t3.clearButtonMode = UITextFieldViewModeAlways;
+    [self.view addSubview:_t3];
+    //设置textField的属性
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,7 +53,6 @@
     [self.view endEditing:YES];
 }
 
-
 - (IBAction)Confirm:(UIButton *)sender forEvent:(UIEvent *)event {
     PFUser *currentUser = [PFUser currentUser];
     NSString *password = _t1.text;
@@ -48,20 +61,15 @@
     
     if ([password isEqualToString:[Utilities getUserDefaults:@"passWord"]]) {
         if ([newpassword isEqualToString:newpassword2]) {
-            
             currentUser[@"password"] = _t2.text;
             UIActivityIndicatorView *aiv = [Utilities getCoverOnView:self.view];
-            
-            
             [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)/*如果成功的插入数据库*/ {
                 [aiv stopAnimating];
                 
                 if (succeeded) {
-                    //  [Utilities setUserDefaults:@"password" content:_newpasswordTF.text];
-                    
                     [Utilities setUserDefaults:@"passWord" content:_t3.text];
                     [Utilities popUpAlertViewWithMsg:@"成功修改！" andTitle:nil];
-                    
+                    [self dismissViewControllerAnimated:YES completion:nil];
                     [PFUser logOut];//退出Parse
                     [aiv stopAnimating];
                     
@@ -89,15 +97,8 @@
         }
         
     }else{
-        [Utilities popUpAlertViewWithMsg:@"与原密码不同，请重新输入" andTitle:nil];
+        [Utilities popUpAlertViewWithMsg:@"请填写信息" andTitle:nil];
     }
-
 }
-
-- (IBAction)returnAction:(UIBarButtonItem *)sender {
-    //跳转到上一级页面
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
 
 @end

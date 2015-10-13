@@ -2,7 +2,7 @@
 //  MainViewController.m
 //  Travel_W
 //
-//  Created by WM on 15/9/19.
+//  Created by 王萌 on 15/9/19.
 //  Copyright (c) 2015年 WM. All rights reserved.
 //
 

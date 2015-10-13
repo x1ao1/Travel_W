@@ -9,16 +9,19 @@
 #import <UIKit/UIKit.h>
 
 @interface HomeViewController : UIViewController
-
-
+{
+    BOOL loadingMore;
+    NSInteger loadCount;
+    NSInteger perPage;
+    NSInteger totalPage;
+}
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 @property (strong,nonatomic) NSMutableArray * slideImages;
-
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong,nonatomic)NSArray *objectsForShow;
-
+@property (strong,nonatomic)NSMutableArray *objectsForShow;
+@property (strong, nonatomic) UIActivityIndicatorView *aiv;
 @property (strong, nonatomic) UIImageView *zoomedIV;
-@property (strong, nonatomic) NSMutableArray *objectsForShow1;
-
+@property(nonatomic,strong) PFObject *Attractions;
+@property (strong, nonatomic) UIActivityIndicatorView *tableFooterAI;
 @end

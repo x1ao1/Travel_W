@@ -8,10 +8,11 @@
 
 #import "LoginViewController.h"
 #import "MainViewController.h"
+#import "ModifiesPasswordViewController.h"
+#import "RegisteredViewController.h"
 @interface LoginViewController ()
 - (IBAction)returnAction:(UIBarButtonItem *)sender;
 - (IBAction)LoginAction:(UIButton *)sender forEvent:(UIEvent *)event;
-//- (IBAction)ForgotPassword:(UIButton *)sender forEvent:(UIEvent *)event;
 @end
 
 @implementation LoginViewController
@@ -20,39 +21,30 @@
     [super viewDidLoad];
     [self UISetting];
     
-    
+    self.navigationController.navigationBar.barTintColor=[UIColor colorWithRed:0 green:0.7 blue:0.9 alpha:1];//设置导航栏的颜色
+    self.navigationController.navigationBar.barStyle=UIBarStyleBlackTranslucent;
     //记住用户名和密码
-    if (![[Utilities getUserDefaults:@"userName"] isKindOfClass:[NSNull class]]) {
-        _UserNameTextField.text = [Utilities getUserDefaults:@"userName"];
-    }
-    
-    if (![[Utilities getUserDefaults:@"passWord"] isKindOfClass:[NSNull class]]) {
-        _PasswordTextField.text = [Utilities getUserDefaults:@"passWord"];
-    }
+//    if (![[Utilities getUserDefaults:@"userName"] isKindOfClass:[NSNull class]]) {
+//        _UserNameTextField.text = [Utilities getUserDefaults:@"userName"];
+//    }
+//    
+//    if (![[Utilities getUserDefaults:@"passWord"] isKindOfClass:[NSNull class]]) {
+//        _PasswordTextField.text = [Utilities getUserDefaults:@"passWord"];
+//    }
 
-    
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"img1.png"]];
 }
 
 //存在时，检查指针是否存在
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
     //判断是否注册成功，是1的时候执行登录界面
     if ([[[storageMgr singletonStorageMgr]objectForKey:@"signup"]integerValue] == 1) {
         [[storageMgr singletonStorageMgr]removeObjectForKey:@"signup"];
-        [self popUpHomePage];
     }
 }
 
-- (void)popUpHomePage
-{
-    //获得TabViewController的名字，跳转到TabViewController
-    MainViewController *tabVC=[Utilities getStoryboardInstanceByIdentity:@"Tab"];
-    UINavigationController* naviVC = [[UINavigationController alloc] initWithRootViewController:tabVC];//创建导航控制器
-    naviVC.navigationBarHidden = YES;//不隐藏导航条
-    [self presentViewController:naviVC animated:YES completion:nil];
-}
 -(void)UISetting{
     //在textField里添加图片
     UIColor* boColor = [UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:100];
@@ -98,8 +90,6 @@
     [super touchesBegan:touches withEvent:event];
     [self.view endEditing:YES];
 }
-
-
 - (IBAction)LoginAction:(UIButton *)sender forEvent:(UIEvent *)event {
     
     
@@ -107,7 +97,7 @@
     NSString *password = _PasswordTextField.text;
     
     if ([username isEqualToString:@""] || [password isEqualToString:@""]) {
-        [Utilities popUpAlertViewWithMsg:@"请填写所有信息" andTitle:nil];
+        [Utilities popUpAlertViewWithMsg:@"请填写用户名或密码" andTitle:nil];
         return;
     }
     //获取保护膜
@@ -117,9 +107,10 @@
         [aiv stopAnimating];
         if (user) {
             //记住用户名和密码
-            [Utilities setUserDefaults:@"userName" content:username];
-            [Utilities setUserDefaults:@"passWord" content:password];
-            [self popUpHomePage];
+//            [Utilities setUserDefaults:@"userName" content:username];
+//            [Utilities setUserDefaults:@"passWord" content:password];
+            NSLog(@"IN");
+            [self dismissViewControllerAnimated:YES completion:nil];
         } else if (error.code == 101) {
             [Utilities popUpAlertViewWithMsg:@"用户名或密码错误" andTitle:nil];
         } else if (error.code == 100) {
@@ -128,22 +119,13 @@
             [Utilities popUpAlertViewWithMsg:nil andTitle:nil];
         }
     }];
-    
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:username forKey:@"account"];
-    [userDefaults setObject:password forKey:@"password"];
-    [userDefaults synchronize];
-    
-    
 }
+
 - (IBAction)returnAction:(UIBarButtonItem *)sender {
     //跳转到上一级页面
     [self dismissViewControllerAnimated:YES completion:nil];
-
+    //push返回上一级页面
+    //[self.navigationController popViewControllerAnimated:YES];
 }
 
-
-//- (IBAction)ForgotPassword:(UIButton *)sender forEvent:(UIEvent *)event {
-//    [PFUser requestPasswordResetForEmailInBackground:@"1217219093@qq.com"];
-//}
 @end

@@ -1,9 +1,9 @@
 //
 //  LNWaterfallFlowCell.m
-//  WaterfallFlowDemo
+//  Travel_W
 //
-//  Created by Lining on 15/5/3.
-//  Copyright (c) 2015年 Lining. All rights reserved.
+//  Created by 王萌 on 15/9/20.
+//  Copyright (c) 2015年 WM. All rights reserved.
 //
 
 #import "LNWaterfallFlowCell.h"
@@ -11,9 +11,7 @@
 #import "UIImageView+WebCache.h"
 
 @interface LNWaterfallFlowCell ()
-
 @property (weak, nonatomic) IBOutlet UIImageView *iconView;
-
 @property (weak, nonatomic) IBOutlet UILabel *priceView;
 
 @end

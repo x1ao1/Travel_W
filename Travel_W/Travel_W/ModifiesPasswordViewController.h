@@ -13,6 +13,4 @@
 @property (weak, nonatomic) IBOutlet UITextField *t2;
 @property (weak, nonatomic) IBOutlet UITextField *t3;
 
-
-
 @end

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface HotViewController : UIViewController
-//<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
-
+<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
+@property(strong,nonatomic)UIImageView *zoomedIV;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @end

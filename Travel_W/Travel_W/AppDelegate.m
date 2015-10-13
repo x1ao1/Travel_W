@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "ViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -24,6 +23,9 @@
 //    self.window.rootViewController =view;
 //    
 //    [self.window makeKeyAndVisible];
+    self.manager=[AFHTTPRequestOperationManager manager];
+    self.manager.responseSerializer=[AFHTTPResponseSerializer serializer];
+    
     
     [Parse setApplicationId:@"sqpmnttcRwGQHtMEZh2hEg6vH5BpXlPZyeCUa3EB" clientKey:@"5BVcf35WdLkHSev2acEYdkNzyP7StRA9Wyzp8vEZ"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];

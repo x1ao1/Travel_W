@@ -7,7 +7,6 @@
 //
 
 #import "SearchViewController.h"
-
 @interface SearchViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
 @property(nonatomic,strong) UISearchBar* searchBar;
 @property(nonatomic,strong)NSMutableArray* searchResult;
@@ -35,7 +34,6 @@
     self.searchBar=searchBar;
     self.searchBar.delegate=self;
     [self.searchBar becomeFirstResponder];
-    
 }
 -(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
@@ -69,12 +67,12 @@
 //创建tableview的数据
 -(void)createTableView
 {
-    CGFloat heigh=self.view.bounds.size.height-SCREEN_HEIGHT;
+    CGFloat heigh=self.view.bounds.size.height;
     CGRect rect=CGRectMake(0, 0, self.view.bounds.size.width,heigh-64);
-    UITableView *table=[[UITableView alloc]initWithFrame:rect style:UITableViewStylePlain];
-    table.dataSource=self;
-    table.delegate=self;
-    [self.view addSubview:table];
+    _table=[[UITableView alloc]initWithFrame:rect style:UITableViewStylePlain];
+    _table.dataSource=self;
+    _table.delegate=self;
+    [self.view addSubview:_table];
 }
 //创建历史数据
 -(void)createHistroyData
@@ -91,11 +89,11 @@
 //当点击search时搜索的记录会被写进plist文件中
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    NSLog(@"%ld",self.searchResult.count);
+    //NSLog(@"%ld",self.searchResult.count);
     int i;
     for( i=0;i<self.searchResult.count;i++)
     {
-        NSLog(@"%@",self.searchResult[i]);
+        //NSLog(@"%@",self.searchResult[i]);
         if([self.searchBar.text isEqualToString: self.searchResult[i]])
         {
             break;
@@ -108,21 +106,25 @@
     NSMutableArray *tempArray=self.searchResult;
     NSUserDefaults *df=[NSUserDefaults standardUserDefaults];
     [df setObject:tempArray forKey:@"历史搜索" ];
+    
+    NSLog(@"searchBar = %@", searchBar.text);
+    PFQuery *query = [PFQuery queryWithClassName:@"Attractions"];
+    [query whereKey:@"Name" containsString:searchBar.text];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            NSLog(@"objects = %@", objects);
+            [self.searchResult removeAllObjects];
+            for (PFObject *obj in objects) {
+                [self.searchResult addObject:obj[@"Name"]];
+            }
+            [_table reloadData];
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

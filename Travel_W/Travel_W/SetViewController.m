@@ -8,12 +8,9 @@
 
 #import "SetViewController.h"
 #import "MineViewController.h"
+#import "ModifiesPasswordViewController.h"
 @interface SetViewController ()
 - (IBAction)ModifiesUsername:(UIButton *)sender forEvent:(UIEvent *)event;
-- (IBAction)ModifiesPassword:(UIButton *)sender forEvent:(UIEvent *)event;
-- (IBAction)logoutAction:(UIButton *)sender forEvent:(UIEvent *)event;
-
-
 
 @end
 
@@ -22,6 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"img2.jpg"]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -48,18 +46,11 @@
             [Utilities popUpAlertViewWithMsg:@"请填写用户名" andTitle:nil];
             return;//终止该方法
         }
-        if ([textField.text isEqualToString:_userLabel.text])
-        {
-            [Utilities popUpAlertViewWithMsg:@"输入的名字相同，请重新输入" andTitle:nil];
-        }
-        
         //读取用户输入的内容
         NSString*string=textField.text;
         //上传用户输入的内容
         currentUser[@"username"]=string;
-        //读取内容
-        _userLabel.text=[NSString stringWithFormat:@"%@",currentUser[@"username"]];
-        
+    
         //刷新
         UIActivityIndicatorView*aiv=[Utilities getCoverOnView:self.view];
         [currentUser saveInBackgroundWithBlock:^(BOOL succeeded,NSError*error)
@@ -68,25 +59,13 @@
              if(succeeded){
                  [[NSNotificationCenter defaultCenter]performSelectorOnMainThread:@selector(postNotification:) withObject:[NSNotification notificationWithName:@"refreshMine" object:self]waitUntilDone:YES];
                  [self.navigationController popViewControllerAnimated:YES];
-                 
              }
              else
-                 
              {
                  [Utilities popUpAlertViewWithMsg:nil andTitle:nil];
              }
              
          }];
     }
-}
-
-
-- (IBAction)ModifiesPassword:(UIButton *)sender forEvent:(UIEvent *)event {
-    
-    
-    
-}
-
-- (IBAction)logoutAction:(UIButton *)sender forEvent:(UIEvent *)event {
 }
 @end

@@ -11,7 +11,6 @@
 #import "HomeTableViewCell.h"
 #import "SearchViewController.h"
 @interface HomeViewController ()<UISearchBarDelegate>
-
 @end
 
 @implementation HomeViewController
@@ -33,13 +32,6 @@
     self.tabBarController.tabBar.hidden=NO;
     item.backBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
 }
-//搜索栏上的按钮点击进入下一个页面
--(void)tap:(UITapGestureRecognizer *)gest
-{
-    SearchViewController *searchView=[[SearchViewController alloc]init];
-    NSLog(@"start");
-    [self.navigationController pushViewController:searchView animated:YES];
-}
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
 {
     SearchViewController *searchView=[[SearchViewController alloc]init];
@@ -54,38 +46,26 @@
     [self.tabBarController.tabBar setHidden:NO];
     self.navigationController.navigationBar.translucent=NO;
 }
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     //导航栏
     [self createSearchBar];
-    
     //界面操作
     [self uiConfiguration];
-
     //到parse读取数据
     [self requestData];
     //去掉tableView多余的下划线
     _tableView.tableFooterView=[[UIView alloc]init];
-   
     [self.navigationController.navigationBar setTranslucent:NO];
     // 定时器 循环
     [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(runTimePage) userInfo:nil repeats:YES];
-    
     _scrollView.bounces = YES;
     _scrollView.pagingEnabled = YES;
     _scrollView.userInteractionEnabled = YES;
     _scrollView.showsHorizontalScrollIndicator = NO;
     _scrollView.alwaysBounceHorizontal = YES;
-    
     // 初始化 数组 并添加六张图片
-    slideImages = [[NSMutableArray alloc] init];
-    [slideImages addObject:@"hd_001.jpg"];
-    [slideImages addObject:@"hd_002.jpg"];
-    [slideImages addObject:@"hd_003.jpg"];
-    [slideImages addObject:@"hd_004.jpg"];
-    [slideImages addObject:@"hd_005.jpg"];
-    [slideImages addObject:@"hd_006.jpg"];
+    slideImages = [[NSMutableArray alloc]initWithObjects:@"hd_001.jpg",@"hd_002.jpg",@"hd_003.jpg",@"hd_004.jpg",@"hd_005.jpg",@"hd_006.jpg", nil];
     _pageControl.numberOfPages = [self.slideImages count];
     _pageControl.currentPage = 0;
     [_pageControl addTarget:self action:@selector(turnPage) forControlEvents:UIControlEventValueChanged]; // 触摸mypagecontrol触发change这个方法事件
@@ -98,7 +78,6 @@
         imageView.frame = CGRectMake((UI_SCREEN_W * i) + UI_SCREEN_W, 0,UI_SCREEN_W, 150);
         [_scrollView addSubview:imageView]; // 首页是第0页,默认从第1页开始的。所以+UI_SCREEN_W。。。
     }
-    
     // 取数组最后一张图片 放在第0页
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[slideImages objectAtIndex:([slideImages count]-1)]]];
     imageView.frame = CGRectMake(0, 0, UI_SCREEN_W,150); // 添加最后1页在首页 循环
@@ -108,9 +87,8 @@
     imageView.frame = CGRectMake((UI_SCREEN_W * ([slideImages count] + 1)) , 0,UI_SCREEN_W, 150); // 添加第1页在最后 循环
     [_scrollView addSubview:imageView];
     
-    [_scrollView setContentSize:CGSizeMake(UI_SCREEN_W * ([slideImages count] + 2), 150)]; //  +上第1页和第4页  原理：4-[1-2-3-4]-1
+    [_scrollView setContentSize:CGSizeMake(UI_SCREEN_W * ([slideImages count] + 2), 150)];
     [_scrollView setContentOffset:CGPointMake(0, 0)];
-    
 }
 // scrollview 委托函数
 - (void)scrollViewDidScroll:(UIScrollView *)sender
@@ -120,7 +98,6 @@
     page --;  // 默认从第二页开始
     _pageControl.currentPage = page;
 }
-
 // scrollview 委托函数
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
@@ -150,7 +127,8 @@
     _pageControl.currentPage = page;
     [self turnPage];
 }
-//------------------------ scrollView ---------------------------------------------
+
+//***下拉刷新***
 -(void)uiConfiguration
 {
     //在可以滚动的控件里执行刷新的控件
@@ -177,12 +155,13 @@
     //执行的动作
     [refreshControl addTarget:self action:@selector(refreshData:) forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:refreshControl];
+    [_tableView reloadData];
 }
 
 //下拉刷新执行的方法
 - (void)refreshData:(UIRefreshControl *)rc
 {
-    [self.tableView reloadData];
+    [self requestData];
     //怎么样让方法延迟执行的
     [self performSelector:@selector(endRefreshing:) withObject:rc afterDelay:1.f];
 }
@@ -190,13 +169,11 @@
 - (void)endRefreshing:(UIRefreshControl *)rc {
     [rc endRefreshing];//闭合
 }
-
-//----------------------下拉刷新-----------------
+//***下拉刷新***
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     
 }
-
 
 //返回tableview的行数
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -212,6 +189,7 @@
     cell.nameLabel.text = object[@"Name"];
     cell.priceLabel.text =object[@"Pirce"];
     cell.citynameLabel.text =object[@"City"];
+    cell.addressLabel.text =object[@"DetailAddress"];
     //获取数据库的图片（下载）
     //创建item
     PFFile *item = object[@"Photo"];
@@ -228,29 +206,111 @@
 }
 //通知 到parse读取数据
 - (void)requestData {
-    //查询Attractions表中当前用户所有字段
+    _aiv = [Utilities getCoverOnView:self.view];
+    [self initializeData];
+}
+//下拉刷新：刷新器+初始数据（第一页数据）
+- (void) initializeData
+{
+    loadCount = 1;//页码为1，从第一页开始
+    perPage = 4;//每页显示4个数据
+    loadingMore = NO;
+    [self urlAction];
+}
+- (void) urlAction
+{
     PFQuery *query = [PFQuery queryWithClassName:@"Attractions"];
-   // [query orderByDescending:@"price"];//降序排序
-    
-    //菊花 指示器
-    UIActivityIndicatorView *aiv = [Utilities getCoverOnView:self.view];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *returnedObjects, NSError *error) {
-        [aiv stopAnimating];//停止动画
+    //[query includeKey:@"owner"];//关联查询
+    [query orderByDescending:@"Pirce"];//降序排序
+    //  [query orderByDescending:@"createdAt"];
+    [query setLimit:perPage];//限定每页显示多少行
+    [query setSkip:(perPage * (loadCount - 1))];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error){
+        [_aiv stopAnimating];
         if (!error) {
-            _objectsForShow = returnedObjects;
-            NSLog(@"%@", _objectsForShow);
-            [_tableView reloadData];
+            //NSLog(@"objects = %@", objects);
+            if (objects.count == 0) {
+                NSLog(@"NO");
+                loadCount --;
+                [self performSelector:@selector(beforeLoadEnd) withObject:nil afterDelay:0.25];//过0.25秒执行终止操作
+            } else {
+                if (loadCount == 1) {
+                    _objectsForShow = nil;
+                    _objectsForShow = [NSMutableArray new];//上拉翻页，新的数据续在第一页的数据之下。若下拉刷新，清空第一二页的内容，然后重新载入第一页的内容
+                }
+                for (PFObject *obj in objects) {
+                    [_objectsForShow addObject:obj];
+                }
+                NSLog(@"_objectsForShow = %@", _objectsForShow);
+                [_tableView reloadData];
+                [self loadDataEnd];
+            }
         } else {
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
+            [self loadDataEnd];
+            NSLog(@"%@", [error description]);
         }
     }];
 }
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if (scrollView.contentSize.height > scrollView.frame.size.height) {
+        if (!loadingMore && scrollView.contentOffset.y > (scrollView.contentSize.height - scrollView.frame.size.height))/**当scrollView的y轴显示位置高度内容大于scrollView的显示高度-scrollView的本身高度**/ {
+            [self loadDataBegin];
+        }
+    } else {
+        if (!loadingMore && scrollView.contentOffset.y > 0)/**内容高度大于scrollView本身的高度，执行刷新**/ {
+            [self loadDataBegin];
+        }
+    }
+}
+
+- (void)loadDataBegin {
+    //这个方法是让上拉时，正在加载时再次上拉时阻断
+    if (loadingMore == NO) /**没有在加载**/{
+        loadingMore = YES;
+        [self createTableFooter];
+        _tableFooterAI = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake((UI_SCREEN_W - 86.0f) / 2 - 30.0f, 10.0f, 20.0f, 20.0f)];//创建一个菊花
+        [_tableFooterAI setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
+        [self.tableView.tableFooterView addSubview:_tableFooterAI];
+        [_tableFooterAI startAnimating];
+        [self loadDataing];
+    }
+}
+
+- (void)loadDataing {
+    loadCount ++;
+    [self urlAction];
+}
+
+- (void)beforeLoadEnd {
+    UILabel *label = (UILabel *)[self.tableView.tableFooterView viewWithTag:9001];
+    [label setText:@"当前已无更多数据"];
+    [_tableFooterAI stopAnimating];
+    _tableFooterAI = nil;
+    [self performSelector:@selector(loadDataEnd) withObject:nil afterDelay:0.25];//再过0.25秒执行loadDataEnd
+}
+
+- (void)loadDataEnd {
+    self.tableView.tableFooterView = [[UIView alloc] init];
+    loadingMore = NO;
+    
+}
+
+- (void)createTableFooter {
+    UIView *tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.tableView.bounds.size.width, 40.0f)];
+    UILabel *loadMoreText = [[UILabel alloc] initWithFrame:CGRectMake((UI_SCREEN_W - 86.0f) / 2, 0.0f, 116.0f, 40.0f)];//UI_SCREEN_W 是屏幕的宽度  上拉刷新的Label  让文字和菊花都在正中间
+    loadMoreText.tag = 9001;//这个Label的标签是9001
+    [loadMoreText setFont:[UIFont systemFontOfSize:B_Font]];
+    [loadMoreText setText:@"上拉显示更多数据"];
+    loadMoreText.textColor = [UIColor grayColor];
+    [tableFooterView addSubview:loadMoreText];
+    self.tableView.tableFooterView = tableFooterView;
+}
+
 
 //取消选择tableView
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
-
 
 //跳转下一页面，切换的按钮会隐藏掉
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

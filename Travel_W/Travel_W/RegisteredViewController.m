@@ -11,7 +11,6 @@
 #import "LoginViewController.h"
 @interface RegisteredViewController ()
 - (IBAction)signupAction:(UIButton *)sender forEvent:(UIEvent *)event;
-- (IBAction)returnAction:(UIBarButtonItem *)sender;
 
 @end
 
@@ -34,12 +33,7 @@
     _emailTF.borderStyle = UITextBorderStyleBezel;
     _emailTF.clearButtonMode = UITextFieldViewModeAlways;
     [self.view addSubview:_emailTF];
-    
-    _addressTF.layer.cornerRadius = 5.0;
-    _addressTF.borderStyle = UITextBorderStyleBezel;
-    _addressTF.clearButtonMode = UITextFieldViewModeAlways;
-    [self.view addSubview:_addressTF];
-    
+
     _confirmPwdTF.layer.cornerRadius = 5.0;
     _confirmPwdTF.borderStyle = UITextBorderStyleBezel;
     _confirmPwdTF.clearButtonMode = UITextFieldViewModeAlways;
@@ -62,13 +56,6 @@
     imgEmail.image = [UIImage imageNamed:@"iconfont-email"];
     [_emailTF.leftView addSubview:imgEmail];
     
-    _addressTF.layer.borderColor = boColor.CGColor;
-    _addressTF.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
-    _addressTF.leftViewMode = UITextFieldViewModeAlways;
-    UIImageView* imgAddress = [[UIImageView alloc] initWithFrame:CGRectMake(11, 11, 22, 22)];
-    imgAddress.image = [UIImage imageNamed:@"iconfont-address"];
-    [_addressTF.leftView addSubview:imgAddress];
-    
     _passwordTF.layer.borderColor = boColor.CGColor;
     _passwordTF.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
     _passwordTF.leftViewMode = UITextFieldViewModeAlways;
@@ -83,6 +70,8 @@
     imgPwd1.image = [UIImage imageNamed:@"iconfont-password"];
     [_confirmPwdTF.leftView addSubview:imgPwd1];
     //在textField里添加图片
+    
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"img1.png"]];
     
 }
 
@@ -105,9 +94,7 @@
     NSString *username=_usernameTF.text;
     NSString *email=_emailTF.text;
     NSString *password=_passwordTF.text;
-    NSString *address=_addressTF.text;
     NSString *confirmPwd=_confirmPwdTF.text;
-    
     if ([username isEqualToString:@""] || [email isEqualToString:@""] || [password isEqualToString:@""] || [confirmPwd isEqualToString:@""]) {
         [Utilities popUpAlertViewWithMsg:@"请填写所有信息" andTitle:nil];
         return;
@@ -116,15 +103,11 @@
         [Utilities popUpAlertViewWithMsg:@"确认密码是必须与密码保持一致" andTitle:nil];
         return;
     }
-    
     //创建用户
     PFUser *user=[PFUser user];
-    PFObject *object=[PFUser user];
-    object[@"address"]=address;
     user.username=username;
     user.password=password;
     user.email=email;
-   
     
     //创建一个保护膜
     UIActivityIndicatorView *aiv = [Utilities getCoverOnView:self.view];
@@ -139,12 +122,9 @@
              
              //注册成功是1的时候，跳转到登录界面
              [[storageMgr singletonStorageMgr]addKeyAndValue:@"sigup" And:@1];//单例化变量中插入一个键值对
-             //注册成功跳转到登录界面
-             //获得TabViewController的名字，跳转到TabViewController
-             LoginViewController *tabVC=[Utilities getStoryboardInstanceByIdentity:@"Login"];
-             UINavigationController* naviVC = [[UINavigationController alloc] initWithRootViewController:tabVC];//创建导航控制器
-             naviVC.navigationBarHidden = YES;//不隐藏导航条
-             [self presentViewController:naviVC animated:YES completion:nil];//Model过去
+             //注册成功退到登录界面
+             [self.navigationController popViewControllerAnimated:YES];
+             
          }else if (error.code == 202) {//202该用户已经使用
              [Utilities popUpAlertViewWithMsg:@"该用户名已被使用，请尝试其它名称" andTitle:nil];
          } else if (error.code == 203) {
@@ -156,14 +136,6 @@
          }else {
              [Utilities popUpAlertViewWithMsg:nil andTitle:nil];
          }
-         
      }];
-
-}
-
-- (IBAction)returnAction:(UIBarButtonItem *)sender {
-    //跳转到上一级页面
-    [self dismissViewControllerAnimated:YES completion:nil];
-
 }
 @end

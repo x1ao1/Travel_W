@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface SetViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UILabel *userLabel;
+//@property (weak, nonatomic) IBOutlet UILabel *userLabel;
 
 @end
